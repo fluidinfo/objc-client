@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		65017ED613D8BCFB003E13CC /* ServerResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 65017ED413D8BCFB003E13CC /* ServerResponse.h */; };
+		65017ED713D8BCFB003E13CC /* ServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 65017ED513D8BCFB003E13CC /* ServerResponse.m */; };
+		651E20B213DC7B50002596A0 /* Namespace.m in Sources */ = {isa = PBXBuildFile; fileRef = 651E20B013DC7B50002596A0 /* Namespace.m */; };
+		651E20B613DC8A44002596A0 /* FluidObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 651E20B413DC8A44002596A0 /* FluidObject.h */; };
+		651E20B713DC8A44002596A0 /* FluidObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 651E20B513DC8A44002596A0 /* FluidObject.m */; };
+		6529A9C013DB239B00587183 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 6529A9BE13DB239B00587183 /* Tag.m */; };
+		65547D3413ED80CA005A1C55 /* FakeServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 65547D3213ED80CA005A1C55 /* FakeServer.h */; };
+		65547D3513ED80CA005A1C55 /* FakeServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65547D3313ED80CA005A1C55 /* FakeServer.m */; };
+		6555EF7C13D5CEFF007F4CDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555EF7B13D5CEFF007F4CDE /* Foundation.framework */; };
+		6555EF8213D5CEFF007F4CDE /* fluidinfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6555EF8113D5CEFF007F4CDE /* fluidinfo.m */; };
+		6555EF8A13D5CEFF007F4CDE /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555EF8913D5CEFF007F4CDE /* SenTestingKit.framework */; };
+		6555EF8C13D5CEFF007F4CDE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555EF8B13D5CEFF007F4CDE /* UIKit.framework */; };
+		6555EF8D13D5CEFF007F4CDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555EF7B13D5CEFF007F4CDE /* Foundation.framework */; };
+		6555EF8F13D5CEFF007F4CDE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555EF8E13D5CEFF007F4CDE /* CoreGraphics.framework */; };
+		6555EF9213D5CEFF007F4CDE /* libfluidinfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6555EF7813D5CEFF007F4CDE /* libfluidinfo.a */; };
+		6555EF9813D5CEFF007F4CDE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6555EF9613D5CEFF007F4CDE /* InfoPlist.strings */; };
+		6555EF9A13D5CEFF007F4CDE /* fluidinfoTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 6555EF9913D5CEFF007F4CDE /* fluidinfoTests.h */; };
+		6555EF9C13D5CEFF007F4CDE /* fluidinfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6555EF9B13D5CEFF007F4CDE /* fluidinfoTests.m */; };
+		6555EFE613D63244007F4CDE /* NSStringAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6555EFE413D63244007F4CDE /* NSStringAdditions.h */; };
+		6555EFE713D63244007F4CDE /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6555EFE513D63244007F4CDE /* NSStringAdditions.m */; };
+		658154BB1421197E00F67270 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 658154B91421197E00F67270 /* Utils.h */; };
+		658154BC1421197E00F67270 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 658154BA1421197E00F67270 /* Utils.m */; };
+		6589778113DCA9200011717F /* Tag.h in Headers */ = {isa = PBXBuildFile; fileRef = 6589778013DCA9200011717F /* Tag.h */; };
+		6589778313DCA93F0011717F /* Namespace.h in Headers */ = {isa = PBXBuildFile; fileRef = 6589778213DCA93F0011717F /* Namespace.h */; };
+		6589778613DCAD400011717F /* Object.h in Headers */ = {isa = PBXBuildFile; fileRef = 6589778413DCAD3F0011717F /* Object.h */; };
+		6589778713DCAD400011717F /* Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 6589778513DCAD400011717F /* Object.m */; };
+		6589779213DDF0B40011717F /* Value.h in Headers */ = {isa = PBXBuildFile; fileRef = 6589779013DDF0B30011717F /* Value.h */; };
+		6589779313DDF0B40011717F /* Value.m in Sources */ = {isa = PBXBuildFile; fileRef = 6589779113DDF0B30011717F /* Value.m */; };
+		658F71BB13F5CF490087D363 /* Session.h in Headers */ = {isa = PBXBuildFile; fileRef = 658F71B913F5CF490087D363 /* Session.h */; };
+		658F71BC13F5CF490087D363 /* Session.m in Sources */ = {isa = PBXBuildFile; fileRef = 658F71BA13F5CF490087D363 /* Session.m */; };
+		65A067A9141D74F9002352BE /* Sample.h in Headers */ = {isa = PBXBuildFile; fileRef = 65A067A7141D74F9002352BE /* Sample.h */; };
+		65A067AA141D74F9002352BE /* Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A067A8141D74F9002352BE /* Sample.m */; };
+		65D2954F13E5A77700623005 /* Permission.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D2954D13E5A77700623005 /* Permission.h */; };
+		65D2955013E5A77700623005 /* Permission.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D2954E13E5A77700623005 /* Permission.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6555EF9013D5CEFF007F4CDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6555EF6F13D5CEFF007F4CDE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6555EF7713D5CEFF007F4CDE;
+			remoteInfo = fluidinfo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		65017ED413D8BCFB003E13CC /* ServerResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ServerResponse.h; path = Fluidinfo/ServerResponse.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		65017ED513D8BCFB003E13CC /* ServerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ServerResponse.m; path = Fluidinfo/ServerResponse.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		651E20B013DC7B50002596A0 /* Namespace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Namespace.m; path = Fluidinfo/Namespace.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		651E20B413DC8A44002596A0 /* FluidObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = FluidObject.h; path = Fluidinfo/FluidObject.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		651E20B513DC8A44002596A0 /* FluidObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = FluidObject.m; path = Fluidinfo/FluidObject.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6529A9BB13DA3D7B00587183 /* testpage.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = testpage.html; path = FluidinfoTests/testpage.html; sourceTree = SOURCE_ROOT; };
+		6529A9BE13DB239B00587183 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Tag.m; path = Fluidinfo/Tag.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		65547D3213ED80CA005A1C55 /* FakeServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FakeServer.h; path = FluidinfoTests/FakeServer.h; sourceTree = SOURCE_ROOT; };
+		65547D3313ED80CA005A1C55 /* FakeServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = FakeServer.m; path = FluidinfoTests/FakeServer.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6555EF7813D5CEFF007F4CDE /* libfluidinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libfluidinfo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6555EF7B13D5CEFF007F4CDE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6555EF7F13D5CEFF007F4CDE /* fluidinfo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fluidinfo-Prefix.pch"; sourceTree = "<group>"; };
+		6555EF8013D5CEFF007F4CDE /* fluidinfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = fluidinfo.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6555EF8113D5CEFF007F4CDE /* fluidinfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fluidinfo.m; sourceTree = "<group>"; };
+		6555EF8813D5CEFF007F4CDE /* fluidinfoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fluidinfoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6555EF8913D5CEFF007F4CDE /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		6555EF8B13D5CEFF007F4CDE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		6555EF8E13D5CEFF007F4CDE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		6555EF9513D5CEFF007F4CDE /* fluidinfoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "fluidinfoTests-Info.plist"; sourceTree = "<group>"; };
+		6555EF9713D5CEFF007F4CDE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6555EF9913D5CEFF007F4CDE /* fluidinfoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = fluidinfoTests.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6555EF9B13D5CEFF007F4CDE /* fluidinfoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = fluidinfoTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6555EFE413D63244007F4CDE /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
+		6555EFE513D63244007F4CDE /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
+		65665CCD13E36D1300E02397 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		65665CCF13E36D4800E02397 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		658154B91421197E00F67270 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = FluidinfoTests/Utils.h; sourceTree = SOURCE_ROOT; };
+		658154BA1421197E00F67270 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = FluidinfoTests/Utils.m; sourceTree = SOURCE_ROOT; };
+		6589778013DCA9200011717F /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Tag.h; path = Fluidinfo/Tag.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6589778213DCA93F0011717F /* Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Namespace.h; path = Fluidinfo/Namespace.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6589778413DCAD3F0011717F /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Object.h; path = Fluidinfo/Object.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		6589778513DCAD400011717F /* Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Object.m; path = Fluidinfo/Object.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6589779013DDF0B30011717F /* Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Value.h; path = Fluidinfo/Value.h; sourceTree = SOURCE_ROOT; };
+		6589779113DDF0B30011717F /* Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Value.m; path = Fluidinfo/Value.m; sourceTree = SOURCE_ROOT; };
+		658F71B913F5CF490087D363 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = Fluidinfo/Session.h; sourceTree = SOURCE_ROOT; };
+		658F71BA13F5CF490087D363 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = Fluidinfo/Session.m; sourceTree = SOURCE_ROOT; };
+		65A067A7141D74F9002352BE /* Sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sample.h; path = Fluidinfo/Sample.h; sourceTree = SOURCE_ROOT; };
+		65A067A8141D74F9002352BE /* Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sample.m; path = Fluidinfo/Sample.m; sourceTree = SOURCE_ROOT; };
+		65D2954D13E5A77700623005 /* Permission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Permission.h; path = Fluidinfo/Permission.h; sourceTree = SOURCE_ROOT; };
+		65D2954E13E5A77700623005 /* Permission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Permission.m; path = Fluidinfo/Permission.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6555EF7513D5CEFF007F4CDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6555EF7C13D5CEFF007F4CDE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6555EF8413D5CEFF007F4CDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6555EF8A13D5CEFF007F4CDE /* SenTestingKit.framework in Frameworks */,
+				6555EF8C13D5CEFF007F4CDE /* UIKit.framework in Frameworks */,
+				6555EF8D13D5CEFF007F4CDE /* Foundation.framework in Frameworks */,
+				6555EF8F13D5CEFF007F4CDE /* CoreGraphics.framework in Frameworks */,
+				6555EF9213D5CEFF007F4CDE /* libfluidinfo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6555EF6D13D5CEFF007F4CDE = {
+			isa = PBXGroup;
+			children = (
+				65665CCD13E36D1300E02397 /* LICENSE */,
+				65665CCF13E36D4800E02397 /* AUTHORS */,
+				6555EF7D13D5CEFF007F4CDE /* fluidinfo */,
+				6555EF9313D5CEFF007F4CDE /* fluidinfoTests */,
+				6555EF7A13D5CEFF007F4CDE /* Frameworks */,
+				6555EF7913D5CEFF007F4CDE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6555EF7913D5CEFF007F4CDE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6555EF7813D5CEFF007F4CDE /* libfluidinfo.a */,
+				6555EF8813D5CEFF007F4CDE /* fluidinfoTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6555EF7A13D5CEFF007F4CDE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6555EF7B13D5CEFF007F4CDE /* Foundation.framework */,
+				6555EF8913D5CEFF007F4CDE /* SenTestingKit.framework */,
+				6555EF8B13D5CEFF007F4CDE /* UIKit.framework */,
+				6555EF8E13D5CEFF007F4CDE /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6555EF7D13D5CEFF007F4CDE /* fluidinfo */ = {
+			isa = PBXGroup;
+			children = (
+				6555EF8013D5CEFF007F4CDE /* fluidinfo.h */,
+				6555EF8113D5CEFF007F4CDE /* fluidinfo.m */,
+				65739F0A13E88CA200F97C35 /* Objects */,
+				65739F0B13E88CD100F97C35 /* Internal */,
+				6555EF7E13D5CEFF007F4CDE /* Supporting Files */,
+				6555EFE413D63244007F4CDE /* NSStringAdditions.h */,
+				6555EFE513D63244007F4CDE /* NSStringAdditions.m */,
+			);
+			path = fluidinfo;
+			sourceTree = "<group>";
+		};
+		6555EF7E13D5CEFF007F4CDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6555EF7F13D5CEFF007F4CDE /* fluidinfo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6555EF9313D5CEFF007F4CDE /* fluidinfoTests */ = {
+			isa = PBXGroup;
+			children = (
+				65A067A7141D74F9002352BE /* Sample.h */,
+				65A067A8141D74F9002352BE /* Sample.m */,
+				6555EF9913D5CEFF007F4CDE /* fluidinfoTests.h */,
+				6555EF9B13D5CEFF007F4CDE /* fluidinfoTests.m */,
+				6555EF9413D5CEFF007F4CDE /* Supporting Files */,
+				65547D3213ED80CA005A1C55 /* FakeServer.h */,
+				65547D3313ED80CA005A1C55 /* FakeServer.m */,
+				658154B91421197E00F67270 /* Utils.h */,
+				658154BA1421197E00F67270 /* Utils.m */,
+			);
+			path = fluidinfoTests;
+			sourceTree = "<group>";
+		};
+		6555EF9413D5CEFF007F4CDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6555EF9513D5CEFF007F4CDE /* fluidinfoTests-Info.plist */,
+				6555EF9613D5CEFF007F4CDE /* InfoPlist.strings */,
+				6529A9BB13DA3D7B00587183 /* testpage.html */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		65739F0A13E88CA200F97C35 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				651E20B413DC8A44002596A0 /* FluidObject.h */,
+				651E20B513DC8A44002596A0 /* FluidObject.m */,
+				6589778213DCA93F0011717F /* Namespace.h */,
+				651E20B013DC7B50002596A0 /* Namespace.m */,
+				6589778413DCAD3F0011717F /* Object.h */,
+				6589778513DCAD400011717F /* Object.m */,
+				65D2954D13E5A77700623005 /* Permission.h */,
+				65D2954E13E5A77700623005 /* Permission.m */,
+				6589778013DCA9200011717F /* Tag.h */,
+				6529A9BE13DB239B00587183 /* Tag.m */,
+				6589779013DDF0B30011717F /* Value.h */,
+				6589779113DDF0B30011717F /* Value.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
+		65739F0B13E88CD100F97C35 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				65017ED413D8BCFB003E13CC /* ServerResponse.h */,
+				65017ED513D8BCFB003E13CC /* ServerResponse.m */,
+				658F71B913F5CF490087D363 /* Session.h */,
+				658F71BA13F5CF490087D363 /* Session.m */,
+			);
+			name = Internal;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6555EF7613D5CEFF007F4CDE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6555EFE613D63244007F4CDE /* NSStringAdditions.h in Headers */,
+				65017ED613D8BCFB003E13CC /* ServerResponse.h in Headers */,
+				651E20B613DC8A44002596A0 /* FluidObject.h in Headers */,
+				6589778113DCA9200011717F /* Tag.h in Headers */,
+				6589778313DCA93F0011717F /* Namespace.h in Headers */,
+				6589778613DCAD400011717F /* Object.h in Headers */,
+				6589779213DDF0B40011717F /* Value.h in Headers */,
+				65D2954F13E5A77700623005 /* Permission.h in Headers */,
+				65547D3413ED80CA005A1C55 /* FakeServer.h in Headers */,
+				658F71BB13F5CF490087D363 /* Session.h in Headers */,
+				65A067A9141D74F9002352BE /* Sample.h in Headers */,
+				658154BB1421197E00F67270 /* Utils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6555EF7713D5CEFF007F4CDE /* fluidinfo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6555EF9F13D5CEFF007F4CDE /* Build configuration list for PBXNativeTarget "fluidinfo" */;
+			buildPhases = (
+				6555EF7413D5CEFF007F4CDE /* Sources */,
+				6555EF7513D5CEFF007F4CDE /* Frameworks */,
+				6555EF7613D5CEFF007F4CDE /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = fluidinfo;
+			productName = fluidinfo;
+			productReference = 6555EF7813D5CEFF007F4CDE /* libfluidinfo.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		6555EF8713D5CEFF007F4CDE /* fluidinfoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6555EFA213D5CEFF007F4CDE /* Build configuration list for PBXNativeTarget "fluidinfoTests" */;
+			buildPhases = (
+				6555EF8313D5CEFF007F4CDE /* Sources */,
+				6555EF8413D5CEFF007F4CDE /* Frameworks */,
+				6555EF8513D5CEFF007F4CDE /* Resources */,
+				6555EF8613D5CEFF007F4CDE /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6555EF9113D5CEFF007F4CDE /* PBXTargetDependency */,
+			);
+			name = fluidinfoTests;
+			productName = fluidinfoTests;
+			productReference = 6555EF8813D5CEFF007F4CDE /* fluidinfoTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6555EF6F13D5CEFF007F4CDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = UNM;
+			};
+			buildConfigurationList = 6555EF7213D5CEFF007F4CDE /* Build configuration list for PBXProject "fluidinfo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6555EF6D13D5CEFF007F4CDE;
+			productRefGroup = 6555EF7913D5CEFF007F4CDE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6555EF7713D5CEFF007F4CDE /* fluidinfo */,
+				6555EF8713D5CEFF007F4CDE /* fluidinfoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6555EF8513D5CEFF007F4CDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6555EF9813D5CEFF007F4CDE /* InfoPlist.strings in Resources */,
+				6555EF9A13D5CEFF007F4CDE /* fluidinfoTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6555EF8613D5CEFF007F4CDE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6555EF7413D5CEFF007F4CDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6555EF8213D5CEFF007F4CDE /* fluidinfo.m in Sources */,
+				6555EFE713D63244007F4CDE /* NSStringAdditions.m in Sources */,
+				65017ED713D8BCFB003E13CC /* ServerResponse.m in Sources */,
+				6529A9C013DB239B00587183 /* Tag.m in Sources */,
+				651E20B213DC7B50002596A0 /* Namespace.m in Sources */,
+				651E20B713DC8A44002596A0 /* FluidObject.m in Sources */,
+				6589778713DCAD400011717F /* Object.m in Sources */,
+				6589779313DDF0B40011717F /* Value.m in Sources */,
+				65D2955013E5A77700623005 /* Permission.m in Sources */,
+				65547D3513ED80CA005A1C55 /* FakeServer.m in Sources */,
+				658F71BC13F5CF490087D363 /* Session.m in Sources */,
+				65A067AA141D74F9002352BE /* Sample.m in Sources */,
+				658154BC1421197E00F67270 /* Utils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6555EF8313D5CEFF007F4CDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6555EF9C13D5CEFF007F4CDE /* fluidinfoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6555EF9113D5CEFF007F4CDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6555EF7713D5CEFF007F4CDE /* fluidinfo */;
+			targetProxy = 6555EF9013D5CEFF007F4CDE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6555EF9613D5CEFF007F4CDE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6555EF9713D5CEFF007F4CDE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6555EF9D13D5CEFF007F4CDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6555EF9E13D5CEFF007F4CDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6555EFA013D5CEFF007F4CDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/fluidinfo.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "fluidinfo/fluidinfo-Prefix.pch";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6555EFA113D5CEFF007F4CDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/fluidinfo.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "fluidinfo/fluidinfo-Prefix.pch";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6555EFA313D5CEFF007F4CDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "fluidinfo/fluidinfo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "fluidinfoTests/fluidinfoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		6555EFA413D5CEFF007F4CDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "fluidinfo/fluidinfo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "fluidinfoTests/fluidinfoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6555EF7213D5CEFF007F4CDE /* Build configuration list for PBXProject "fluidinfo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6555EF9D13D5CEFF007F4CDE /* Debug */,
+				6555EF9E13D5CEFF007F4CDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6555EF9F13D5CEFF007F4CDE /* Build configuration list for PBXNativeTarget "fluidinfo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6555EFA013D5CEFF007F4CDE /* Debug */,
+				6555EFA113D5CEFF007F4CDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6555EFA213D5CEFF007F4CDE /* Build configuration list for PBXNativeTarget "fluidinfoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6555EFA313D5CEFF007F4CDE /* Debug */,
+				6555EFA413D5CEFF007F4CDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6555EF6F13D5CEFF007F4CDE /* Project object */;
+}
