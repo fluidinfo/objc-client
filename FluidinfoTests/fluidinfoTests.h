@@ -17,27 +17,18 @@
 - (void) setUp;
 - (void) tearDown;
 - (void) testPutPrimitive;
-/*
-- (void) testDeleteTagViaAbout;
-- (void) testURLArgsWithGetRequest;
-- (void) testGetQuery;
-- (void) testGetQueryWithArgs;
-- (void) testPutWithQuery;
-- (void) testSampleObjects;
-- (void) testPutWithMime;
-- (void) testTagDeletion;
-- (void) testNamespaceCreationAndDeletion;
-- (void) testObjectCreation;
-- (void) testObjectCreationWithAbout;
-- (void) testObjectAddTag;
-- (void) testObjectRemoveTag;
-- (void) testObjectMultipleTags;
-- (void) testPrimitiveTagValues;
-- (void) testTagsWithJsonValues;//TODO
-- (void) testTagsSetByTagPaths;
-- (void) testGetVariousPerms;
-- (void) testGetValuesWithTags;
- */
+- (void) testNamespaceCreation;
+- (void) testNamespaceDelete;
+- (void) testNamespaceUpdate;
+- (void) testTagCreation;
+- (void) testTagDelete;
+- (void) testTagUpdate;
+// test permissions
+// test objects
+// test response handling: 
+//    for object queries (refresh, get, head, save)
+//    for the same, but with errors
+//    for queries that return a list of Fluidinfo objects and possibly tag values
 - (void) dataCheck:(NSMutableURLRequest *)request forValue:(id)val;
 @end
 
