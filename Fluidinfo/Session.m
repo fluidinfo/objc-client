@@ -227,9 +227,23 @@
     BOOL sofarsogood = YES;
     // try to save all of the dirty tags, but returns YES only if they
     // all saved correctly.
-    for (NSString * tag in [[obj dirtytags] copy]) 
-      sofarsogood = [self object:obj saveTag:[[obj tagObjects] valueForKey:tag]] && sofarsogood;
-    return sofarsogood;
+    NSMutableArray *prims = [NSMutableArray alloc];
+      // save the assignments and put it into another dictionary before sending it.
+    NSMutableDictionary * assignments = [[NSMutableDictionary alloc] init];
+      id val;
+      for (NSString * tag in [[obj dirtytags] copy]) {
+          val = [[obj tagObjects] objectForKey:tag];
+        if ([self isPrimitive:val])
+            [assignments setObject:val forKey:tag];
+          [[obj dirtytags] removeObject:tag];
+             }
+      NSDictionary *final = [NSDictionary dictionaryWithObject:assignments forKey:
+                             [NSString stringWithFormat:@"fluiddb/id = %@", [obj fluidinfoId]]];
+      [self doRequest:[self putWithPath:@"/values" andQuery:final]];
+      for (NSString * tag in [[obj dirtytags] copy]) {      
+         sofarsogood = [self object:obj saveTag:[[obj tagObjects] valueForKey:tag]] && sofarsogood;
+          return sofarsogood;
+  }
   }
     NSMutableURLRequest *request = [self 
                                     putWithPath:[fl resavePath] andJson:[fl resaveJSON]];
@@ -241,6 +255,21 @@
     }
     [fl markClean];
     return YES;
+  }
+
+- (BOOL) isPrimitive:(id)thing
+{
+    if ([thing isKindOfClass:[NSString class]])
+        return YES;
+    if ([thing isKindOfClass:[NSArray class]]) {
+        for (id item in thing)
+            if (![item isKindOfClass:[NSString class]])
+                return NO;
+        return YES;
+    }
+    if ([thing isKindOfClass:[Value class]] && ![((Value *) thing) type])
+        return YES;
+    return NO;
 }
 
 - (BOOL) delete:(FluidObject *)fl
