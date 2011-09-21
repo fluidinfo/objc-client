@@ -23,6 +23,7 @@
 - (void) testTagCreation;
 - (void) testTagDelete;
 - (void) testTagUpdate;
+- (void) testObjectSaveWithTagValues;
 // test permissions
 // test objects
 // test response handling: 

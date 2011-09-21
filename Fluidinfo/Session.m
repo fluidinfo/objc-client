@@ -220,56 +220,57 @@
 
 - (BOOL) resave:(FluidObject *)fl
 {
-  if ([fl isKindOfClass:[Object class]]) {
+    if (![fl isKindOfClass:[Object class]]) {
+	NSMutableURLRequest *request = [self 
+					   putWithPath:[fl resavePath] andJson:[fl resaveJSON]];
+	ServerResponse * response = [self doRequest:request];
+	if (response.err != NULL)
+	    { 
+		[fl setErr:response.err];
+		return NO;
+	    }
+	[fl markClean];
+	return YES;
+    }
     Object * obj = (Object *) fl;
     if (![obj isdirty]) return YES;
     // this is a  one-liner with foldl, in Haskell.  :(
     BOOL sofarsogood = YES;
     // try to save all of the dirty tags, but returns YES only if they
     // all saved correctly.
-    NSMutableArray *prims = [NSMutableArray alloc];
-      // save the assignments and put it into another dictionary before sending it.
+    // save the assignments and put it into another dictionary before sending it.
     NSMutableDictionary * assignments = [[NSMutableDictionary alloc] init];
-      id val;
-      for (NSString * tag in [[obj dirtytags] copy]) {
-          val = [[obj tagObjects] objectForKey:tag];
-        if ([self isPrimitive:val])
+    id val;
+    for (NSString * tag in [[obj dirtytags] copy]) {
+	val = [[obj tagValues] objectForKey:tag];
+        if ([self isPrimitive:val]) {
             [assignments setObject:val forKey:tag];
-          [[obj dirtytags] removeObject:tag];
-             }
-      NSDictionary *final = [NSDictionary dictionaryWithObject:assignments forKey:
-                             [NSString stringWithFormat:@"fluiddb/id = %@", [obj fluidinfoId]]];
-      [self doRequest:[self putWithPath:@"/values" andQuery:final]];
-      for (NSString * tag in [[obj dirtytags] copy]) {      
-         sofarsogood = [self object:obj saveTag:[[obj tagObjects] valueForKey:tag]] && sofarsogood;
-          return sofarsogood;
-  }
-  }
-    NSMutableURLRequest *request = [self 
-                                    putWithPath:[fl resavePath] andJson:[fl resaveJSON]];
-    ServerResponse * response = [self doRequest:request];
-    if (response.err != NULL)
-    { 
-        [fl setErr:response.err];
-        return NO;
+            [[obj dirtytags] removeObject:tag]; 
+        }
     }
-    [fl markClean];
-    return YES;
-  }
+    NSDictionary *final = [NSDictionary dictionaryWithObject:assignments forKey:
+				  [NSString stringWithFormat:@"fluiddb/id = %@", [obj fluidinfoId]]];
+    ServerResponse * resp = [self doRequest:[self putWithPath:@"/values" andQuery:final]];
+    // the only place to save a group error like this is on the object itself.
+   if ([resp err]) {
+       sofarsogood = NO;
+       obj.err = resp.err;
+    }
+   BOOL success;
+    for (NSString * tag in [[obj dirtytags] copy]) {      
+	success = [self object:obj saveTag:[[obj tagValues] valueForKey:tag]];
+	if (!success)
+        // these errors can be saved per-tag.
+	    [[[obj tags] objectForKey:tag] setErr:[resp err]];
+        sofarsogood = success && sofarsogood;
+    }
+	return sofarsogood;
+}
+
 
 - (BOOL) isPrimitive:(id)thing
 {
-    if ([thing isKindOfClass:[NSString class]])
-        return YES;
-    if ([thing isKindOfClass:[NSArray class]]) {
-        for (id item in thing)
-            if (![item isKindOfClass:[NSString class]])
-                return NO;
-        return YES;
-    }
-    if ([thing isKindOfClass:[Value class]] && ![((Value *) thing) type])
-        return YES;
-    return NO;
+    return [thing isKindOfClass:[Value class]] && ![((Value *) thing) type];
 }
 
 - (BOOL) delete:(FluidObject *)fl
@@ -398,7 +399,7 @@
 
 - (BOOL) object:(Object *)fl saveTagByString:(NSString *)t
 {
-  return [self object:fl saveTag:[[fl tagObjects] valueForKey:t]];
+  return [self object:fl saveTag:[[fl tags] valueForKey:t]];
 }
 
 - (BOOL) object:(Object *)fl saveTag:(Tag *)t
@@ -441,7 +442,7 @@
 
 - (BOOL) object:(Object *)fl removeTagString:(NSString *)s
 {
-  return [self object:fl removeTag:[[fl tagObjects] valueForKey:s]];
+  return [self object:fl removeTag:[[fl tags] valueForKey:s]];
 }
 
 - (BOOL) object:(Object *)fl removeTag:(Tag *)t
@@ -644,8 +645,14 @@
 // convert a primitive value, such as an integer (which must be
 // already packed into an NSValue in order to be passed to this
 // function), into suitable NSData for sending over the wire.
-+ (NSString *) packPrimitive:(id)c
++ (NSString *) packPrimitive:(id)content
 {
+    // the content might be in a Value, for whatever reason.
+    id c;
+    if ([content isKindOfClass:[Value class]])
+         c = [content value];
+    else
+         c = content;
     if (c == NULL) return @"null";
     if ([c isKindOfClass:[NSString class]])
         return [NSString stringWithFormat:@"\"%@\"",c];

@@ -16,20 +16,19 @@
 // tagPaths as keys.  it must be used with discretion for now.  Later,
 // memory-control measures must be added, to comply with Apple's
 // memory requirements.  we don't want things crashing.
-    NSMutableDictionary * tags;
+    NSMutableDictionary * tagValues;
 // the tagObjects dictionary also has tagpaths as keys, but tag
 // objects as values.  this makes saving / using tags with tag-values
 // easy.  this is referenced, not copied, so you can use the same tag
 // in multiple objects and have it actually really be the same tag.
 @private
-    NSMutableDictionary * tagObjects;
-  // list of tag-values that have not been saved.
+    NSMutableDictionary * tags;
     NSString * about;
     NSMutableArray * dirtytags;
 }
 @property (readwrite, copy) NSString * about;
-@property (readonly, retain) NSMutableDictionary * tags;
-@property (retain, readwrite) NSMutableDictionary * tagObjects;
+@property (readonly, retain) NSMutableDictionary * tagValues;
+@property (retain, readwrite) NSMutableDictionary * tags;
 @property (readwrite, retain) NSMutableArray * dirtytags;
 - (id) init;
 - (id) initWithAbout:(NSString *)a;

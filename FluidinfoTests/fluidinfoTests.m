@@ -176,6 +176,33 @@
     // TODO: check JSON.
 }
 
+- (void) testObjectSaveWithTagValues
+{
+    Object * obj = [FluidObject Object];
+    obj.URI = @"oentush,";
+    obj.fluidinfoId = @".,curhs.co";
+    
+    // first, a values-put.
+    Tag * prim1 = [FluidObject Tag:@"prim1" withPath:@"test/public"];
+    Tag * prim2 = [FluidObject Tag:@"prim2" withPath:@"test/public"];
+    [obj setTag:prim1 withValue:[[Value alloc] initWithValue:@"this is a primitive-bearing tag."]];
+    [obj setTag:prim2 withValue:[[Value alloc] initWithValue:[NSNumber numberWithInteger:42]]];
+    [session save:obj];
+    
+    NSMutableURLRequest * request = [[[obj err] userInfo] objectForKey:@"request"];
+    BOOL okayheaders = [Utils headersOkay:[request allHTTPHeaderFields]
+                              withAllowed:[NSArray arrayWithObjects:@"User-Agent", @"Accept", nil]
+                                 required:[NSArray arrayWithObjects:@"Authorization", @"Content-Type", @"Content-Length", nil]];
+    STAssertTrue(okayheaders, @"correct headers");
+    BOOL okayContent = [[request valueForHTTPHeaderField:@"Content-Type"] isEqualToString:@"application/json"];
+    STAssertTrue(okayContent, @"correct Content-Type.");
+    STAssertTrue([@"PUT" isEqualToString:[request HTTPMethod]], @"correct method");
+    STAssertTrue([[[request URL] path] isEqualToString:@"/values"], @"correct path.");
+    const char * json = [[request HTTPBody] bytes];
+    NSLog(@"HTTPBody:\n%s", [[request HTTPBody] bytes]);
+    STAssertTrue(strcmp(json, "{\"queries\":[[\"fluiddb/id = .,curhs.co\",{\"test/public/prim1\":{\"value\":\"this is a primitive-bearing tag.\"},\"test/public/prim2\":{\"value\":42}}]]}") == 0, @"correct json.");
+}
+
 
 
 // TODO: this test has uncovered a problem in the JSON library, which is that it decodes floats as decimals, rounding as necessary.  We have to override how JSONSerialization is doing this, or possibly report the issue to Apple.  Meanwhile, this test might as well just check to see if the decimal is reasonably close to its original value.
