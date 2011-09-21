@@ -34,6 +34,7 @@
 - (BOOL) reset:(FluidObject *)fl;
 - (BOOL) save:(FluidObject *)fl;
 - (BOOL) resave:(FluidObject *)fl;
+- (BOOL) isPrimitive:(id)thing; // wrong spot!  move soon.
 - (BOOL) delete:(FluidObject *)fl;
 
 - (Permission *) getPermission:(NSString *)act for:(FluidObject *)fl;
