@@ -36,7 +36,7 @@
 - (NSArray *) tagPaths;
 - (Value *) tagValue:(Tag *)t;
 - (BOOL) setTag:(Tag *)t withValue:(Value *)v;
-- (BOOL) setTagPath:(NSString *)t withValue:(id)v;
+- (BOOL) setTagPath:(NSString *)t withValue:(Value *)v;
 - (NSString *) pathForTag:(Tag *)t;
 - (NSString *) description;
 // the following are not really used:

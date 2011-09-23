@@ -78,7 +78,7 @@
 }
 
 // this method does create a Tag object, but it is assumed to be an existent tag, so it creates a "clean" tag.  Do not use this method to create new tags.
-- (BOOL) setTagPath:(NSString *)t withValue:(id)v
+- (BOOL) setTagPath:(NSString *)t withValue:(Value *)v
 {
     Tag * tag = [Tag cleanTagWithName:[t lastPathComponent] andPath:[t stringByDeletingLastPathComponent]];
     [tagValues setValue:v forKey:t];

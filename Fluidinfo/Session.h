@@ -50,20 +50,21 @@
 - (BOOL) object:(Object *)fl removeTagString:(NSString *)t;
 
 // lower-level methods.
-- (id) getWithPath:(NSString *)s;
-- (id) getWithPath:(NSString *)s andArgs:(NSArray *)a;
-- (id) getWithPath:(NSString *)s andQuery:(NSString *)q;
-- (id) getWithQuery:(NSString *)q forTags:(NSArray *)t;
-- (id) pathWithQuery:(NSString *)q forTags:(NSArray *)arr;
-- (id) headWithPath:(NSString *)s;
-- (id) putWithPath:(NSString *)s andContent:(id)c;
-- (id) putWithPath:(NSString *)s andJson:(id)j;
-- (id) putWithPath:(NSString *)s andQuery:(NSDictionary *)dic;
-- (id) putWithPath:(NSString *)s andMimeType:(NSString *)t andContent:(NSData *)c;
-- (id) postWithPath:(NSString *)s;
-- (id) postWithPath:(NSString *)s andContent:(NSData *)c;
-- (id) postWithPath:(NSString *)s andJson:(id)j;
-- (id) deleteWithPath:(NSString *)s;
+- (ServerResponse *) getWithPath:(NSString *)s;
+- (NSMutableURLRequest *) subGetWithPath:(NSString *)s;
+- (ServerResponse *) getWithPath:(NSString *)s andArgs:(NSArray *)a;
+- (ServerResponse *) getWithPath:(NSString *)s andQuery:(NSString *)q;
+- (ServerResponse *) getWithQuery:(NSString *)q forTags:(NSArray *)t;
+- (NSString *) pathWithQuery:(NSString *)q forTags:(NSArray *)arr;
+- (ServerResponse *) headWithPath:(NSString *)s;
+- (ServerResponse *) putWithPath:(NSString *)s andContent:(id)c;
+- (ServerResponse *) putWithPath:(NSString *)s andJson:(id)j;
+- (ServerResponse *) putWithQuery:(NSDictionary *)dic;
+- (ServerResponse *) putWithPath:(NSString *)s andMimeType:(NSString *)t andContent:(NSData *)c;
+- (ServerResponse *) postWithPath:(NSString *)s;
+- (ServerResponse *) postWithPath:(NSString *)s andContent:(NSData *)c;
+- (ServerResponse *) postWithPath:(NSString *)s andJson:(id)j;
+- (ServerResponse *) deleteWithPath:(NSString *)s;
 
 + (NSString *) packPrimitive:(id)c;
 + (NSString *) doArgs:(NSArray *)d;

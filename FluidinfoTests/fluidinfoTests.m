@@ -39,7 +39,8 @@
 
 - (void) testHead
 {
-    NSMutableURLRequest * request = [session headWithPath:@"/about/albuquerque/test/anamespace/inttag"];
+    ServerResponse * response = [session headWithPath:@"/about/albuquerque/test/anamespace/inttag"];
+    NSMutableURLRequest * request = [[[response err] userInfo] objectForKey:@"request"];
     BOOL okayheaders = [Utils headersOkay:[request allHTTPHeaderFields]
                               withAllowed:[NSArray arrayWithObjects:@"User-Agent", @"Accept", @"Authorization", nil]
                                  required:NULL];
@@ -52,10 +53,13 @@
 - (void) testPutPrimitive
 {
     NSArray *types = [NSArray arrayWithObjects:@"float",@"set",@"int",@"string",@"bool",@"null",nil];
+    NSMutableURLRequest * request;
+    ServerResponse * response;
     for (NSString * ty in types) {
         id val = [Utils randomValuewithType:ty];
-        NSMutableURLRequest * request = [session putWithPath:@"/about/albuquerque/test/foo/footag" 
+        response = [session putWithPath:@"/about/albuquerque/test/foo/footag" 
                                                   andContent:val];
+        request = [[[response err] userInfo] objectForKey:@"request"];
         BOOL okayheaders = [Utils headersOkay:[request allHTTPHeaderFields]
                               withAllowed:[NSArray arrayWithObjects:@"User-Agent", @"Accept", nil]
                                  required:[NSArray arrayWithObjects:@"Authorization", @"Content-Type", @"Content-Length", nil]];
@@ -199,8 +203,9 @@
     STAssertTrue([@"PUT" isEqualToString:[request HTTPMethod]], @"correct method");
     STAssertTrue([[[request URL] path] isEqualToString:@"/values"], @"correct path.");
     const char * json = [[request HTTPBody] bytes];
-    NSLog(@"HTTPBody:\n%s", [[request HTTPBody] bytes]);
-    STAssertTrue(strcmp(json, "{\"queries\":[[\"fluiddb/id = .,curhs.co\",{\"test/public/prim1\":{\"value\":\"this is a primitive-bearing tag.\"},\"test/public/prim2\":{\"value\":42}}]]}") == 0, @"correct json.");
+    NSLog(@"HTTPBody:\n%s", json);
+    // not sure why the following is failing.  I can't get the escapes right.
+    STAssertTrue(strcmp(json, "{\"queries\":[[\"fluiddb\\/id = \\\".,curhs.co\\\"\",{\"test\\/public\\/prim1\":{\"value\":\"this is a primitive-bearing tag.\"}}") == 0, @"correct json.");
 }
 
 

@@ -91,7 +91,7 @@
 		658F71B913F5CF490087D363 /* Session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Session.h; path = Fluidinfo/Session.h; sourceTree = SOURCE_ROOT; };
 		658F71BA13F5CF490087D363 /* Session.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Session.m; path = Fluidinfo/Session.m; sourceTree = SOURCE_ROOT; };
 		65A067A7141D74F9002352BE /* Sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sample.h; path = Fluidinfo/Sample.h; sourceTree = SOURCE_ROOT; };
-		65A067A8141D74F9002352BE /* Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sample.m; path = Fluidinfo/Sample.m; sourceTree = SOURCE_ROOT; };
+		65A067A8141D74F9002352BE /* Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Sample.m; path = Fluidinfo/Sample.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		65D2954D13E5A77700623005 /* Permission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Permission.h; path = Fluidinfo/Permission.h; sourceTree = SOURCE_ROOT; };
 		65D2954E13E5A77700623005 /* Permission.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Permission.m; path = Fluidinfo/Permission.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */

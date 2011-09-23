@@ -97,8 +97,7 @@
 - (id) get:(FluidObject *)fl
 // get returns whatever JSON fluiddb gives back.  Use refresh to refresh an object's attributes.
 {
-    NSMutableURLRequest *req = [self getWithPath:[fl resavePath]];
-    ServerResponse * response = [self doRequest:req];
+    ServerResponse * response = [self getWithPath:[fl resavePath]];
     if (response.err != NULL)
     {
         [fl setErr:response.err];
@@ -111,8 +110,7 @@
 - (id) get:(FluidObject *)fl withArgs:(NSArray *)args
 // get returns whatever JSON fluiddb gives back.  Use refresh to refresh an object's attributes.
 {
-    NSMutableURLRequest *req = [self getWithPath:[fl resavePath] andArgs:args];
-    ServerResponse * response = [self doRequest:req];
+    ServerResponse * response = [self getWithPath:[fl resavePath] andArgs:args];
     if (response.err != NULL)
     {
                 [fl setErr:response.err];
@@ -196,13 +194,12 @@
     if ([fl URI] && [fl fluidinfoId]) return [self resave:fl];
     // then it's really a first-time save...
     // set the request
-    NSMutableURLRequest *request;
+    ServerResponse * response;
     id j = [fl saveJSON];
     if (j) // Objects have no json to post.
-        request = [self postWithPath:[fl savePath] andJson:j];
+        response = [self postWithPath:[fl savePath] andJson:j];
     else
-        request = [self postWithPath:[fl savePath]];
-    ServerResponse * response = [self doRequest:request];
+        response = [self postWithPath:[fl savePath]];
     if (response.err != NULL)
         {
             [fl setErr:response.err];
@@ -221,9 +218,8 @@
 - (BOOL) resave:(FluidObject *)fl
 {
     if (![fl isKindOfClass:[Object class]]) {
-	NSMutableURLRequest *request = [self 
+	ServerResponse * response = [self 
 					   putWithPath:[fl resavePath] andJson:[fl resaveJSON]];
-	ServerResponse * response = [self doRequest:request];
 	if (response.err != NULL)
 	    { 
 		[fl setErr:response.err];
@@ -244,13 +240,13 @@
     for (NSString * tag in [[obj dirtytags] copy]) {
 	val = [[obj tagValues] objectForKey:tag];
         if ([self isPrimitive:val]) {
-            [assignments setObject:val forKey:tag];
+            [assignments setObject:[((Value *)val) value] forKey:tag];
             [[obj dirtytags] removeObject:tag]; 
         }
     }
-    NSDictionary *final = [NSDictionary dictionaryWithObject:assignments forKey:
-				  [NSString stringWithFormat:@"fluiddb/id = %@", [obj fluidinfoId]]];
-    ServerResponse * resp = [self doRequest:[self putWithPath:@"/values" andQuery:final]];
+    NSDictionary * final = [NSDictionary dictionaryWithObject:assignments forKey:
+				  [NSString stringWithFormat:@"fluiddb/id = \"%@\"", [obj fluidinfoId]]];
+    ServerResponse * resp = [self putWithQuery:final];
     // the only place to save a group error like this is on the object itself.
    if ([resp err]) {
        sofarsogood = NO;
@@ -275,8 +271,7 @@
 
 - (BOOL) delete:(FluidObject *)fl
 {
-    NSMutableURLRequest *request = [self deleteWithPath:[fl resavePath]];
-    ServerResponse * response = [self doRequest:request];
+    ServerResponse * response = [self deleteWithPath:[fl resavePath]];
     if (response.err != NULL)
     { 
         [fl setErr:response.err];
@@ -292,8 +287,7 @@
     path = [NSString stringWithFormat:@"/permissions/namespaces/%@", [((Namespace *) fl) fullpath]];    
   else if ([fl isKindOfClass:[Tag class]])
     path = [NSString stringWithFormat:@"/permissions/tags/%@", [((Tag *) fl) fullpath]];
-  NSMutableURLRequest * req = [self getWithPath:path andArgs:[NSArray arrayWithObject:[NSString stringWithFormat:@"action=%@", act]]];
-  ServerResponse *resp = [self doRequest:req];
+  ServerResponse *resp = [self getWithPath:path andArgs:[NSArray arrayWithObject:[NSString stringWithFormat:@"action=%@", act]]];
   if (resp.err != NULL) return NULL;
   NSDictionary * rdict = [NSJSONSerialization JSONObjectWithData:resp.data options:normal error:NULL];
   enum policy pol = [rdict valueForKey:@"policy"] == @"open" ? (enum policy) OPEN : (enum policy) CLOSED;
@@ -308,13 +302,12 @@
     path = [NSString stringWithFormat:@"/permissions/namespaces/%@", [((Namespace *) fl) fullpath]];
   else if ([fl isKindOfClass:[Tag class]]) 
     path = [NSString stringWithFormat:@"/permissions/tags/%@", [((Tag *) fl) fullpath]];
-  NSMutableURLRequest *req = [self putWithPath:path andJson:
+  ServerResponse *resp = [self putWithPath:path andJson:
 				     [NSDictionary 
 				       dictionaryWithObjectsAndKeys:
 					 p->_policy == 0 ? @"closed" : @"open", @"policy",
 				       [p getExceptions], @"exceptions",
 				       nil]];
-  ServerResponse *resp = [self doRequest:req];
   if (resp.err != NULL) 
     {
       [fl setErr:resp.err];
@@ -330,8 +323,7 @@
 - (Permission *) getTagValuePermission:(NSString *)act forTag:(Tag *)t
 {
   NSString * path = [NSString stringWithFormat:@"/permissions/tag-values/%@", [t fullpath]];
-  NSMutableURLRequest * req = [self getWithPath:path andArgs:[NSArray arrayWithObject:[NSString stringWithFormat:@"action=%@", act]]];
-  ServerResponse *resp = [self doRequest:req];
+  ServerResponse *resp = [self getWithPath:path andArgs:[NSArray arrayWithObject:[NSString stringWithFormat:@"action=%@", act]]];
   if (resp.err != NULL) return NULL;
   NSDictionary * rdict = [NSJSONSerialization JSONObjectWithData:resp.data options:normal error:NULL];
   enum policy pol = [rdict valueForKey:@"policy"] == @"open" ? (enum policy) OPEN : (enum policy) CLOSED;
@@ -349,13 +341,12 @@
 {
 
   NSString * path = [NSString stringWithFormat:@"/permissions/tag-values/%@", [t fullpath]];
-  NSMutableURLRequest *req = [self putWithPath:path andJson:
+  ServerResponse *resp = [self putWithPath:path andJson:
 				     [NSDictionary 
 				       dictionaryWithObjectsAndKeys:
 					 p->_policy == 0 ? @"closed" : @"open", @"policy",
 				       [p getExceptions], @"exceptions",
 				       nil]];
-  ServerResponse *resp = [self doRequest:req];
   if (resp.err != NULL) 
     {
       [t setErr:resp.err];
@@ -370,7 +361,7 @@
 // load a tag-value from Fluidinfo into the object's tags dictionary.
     NSString * path = [NSString stringWithFormat:@"%@/%@",
 				[o savePath], [t path]];
-    ServerResponse * resp = [self doRequest:[self getWithPath:path]];
+    ServerResponse * resp = [self getWithPath:path];
     if ([resp.response statusCode] == 200)
 	{   
 	    // it should try to figure out what the value is and cast it.  this will do for now.
@@ -389,7 +380,7 @@
 - (BOOL) object:(Object *)fl hasTag:(Tag *)t
 {
     NSString * path = [fl pathForTag:t];
-    ServerResponse * resp = [self doRequest:[self headWithPath:path]];
+    ServerResponse * resp = [self headWithPath:path];
     NSInteger code = [resp.response statusCode];
     if (code == 200)
 	return YES;
@@ -409,29 +400,28 @@
         return YES;
     // create vars.
     Value * v = [[fl tags] valueForKey:[t fullpath]];
-    NSMutableURLRequest * request;
     NSString *path = [fl pathForTag:t];
     // set the request content for NSData puts.
+    ServerResponse * response;
     if ([[v value] isKindOfClass:[NSData class]])
 	{
 	    NSData *content = [v value];
 	    if (content == NULL && v.filepath != NULL)
 		content = [NSData dataWithContentsOfURL:v.filepath];
 	    if (v.type == NULL)
-            request = [self putWithPath:path andContent:content];
+            response = [self putWithPath:path andContent:content];
 	    else
-            request = [self putWithPath:path andMimeType:v.type andContent:content];
+            response = [self putWithPath:path andMimeType:v.type andContent:content];
 	}
     else
         if (v.type == @"application/json")
             // it is assumed to be either an NSArray, or an NSDictionary,
             // i.e. serializable for JSON and intended to be sent as JSON.
-            request = [self putWithPath:path andJson:[v value]];
+            response = [self putWithPath:path andJson:[v value]];
         else
             // then it must be a primitive value, which FluidRequests will wrap for us.
-            request = [self putWithPath:path andContent:[v value]];
+            response = [self putWithPath:path andContent:[v value]];
     // contact the server, store the error if any, and return a helpful boolean.
-    ServerResponse * response = [self doRequest:request];
     if ([response.response statusCode] == 204) {
         [[fl dirtytags] removeObject:[t fullpath]];   
         return YES;
@@ -447,15 +437,19 @@
 
 - (BOOL) object:(Object *)fl removeTag:(Tag *)t
 {
-    ServerResponse * resp = [self doRequest:[self deleteWithPath:
-						    [fl pathForTag:t]]];
+    ServerResponse * resp = [self deleteWithPath:[fl pathForTag:t]];
     if (resp.err == NULL)
 	return YES;
     [fl setErr: resp.err];
     return NO;
 }
 
-- (id)getWithPath:(NSString *)_path 
+- (ServerResponse *)getWithPath:(NSString *)_path 
+{
+  return [self doRequest:[self subGetWithPath:_path]];
+}
+
+- (NSMutableURLRequest *)subGetWithPath:(NSString *)_path 
 {
     if (headers == NULL) [self initHeaders];
     NSURL *u = [NSURL URLWithString:_path relativeToURL:INSTANCE];
@@ -466,45 +460,43 @@
     return req;
 }
 
-- (id) getWithPath:(NSString *)s andArgs:(NSArray *)a
+- (ServerResponse *) getWithPath:(NSString *)s andArgs:(NSArray *)a
 {
   NSString *args = [Session doArgs:a];
     NSString *url = [NSString stringWithFormat:@"%@?%@", s, args];
-    NSMutableURLRequest *req = [self getWithPath:url];
-    return req;
+    return [self getWithPath:url];
 }
 
-- (id) getWithPath:(NSString *)s andQuery:(NSString *)q
+- (ServerResponse *) getWithPath:(NSString *)s andQuery:(NSString *)q
 {
   NSString * url = [NSString stringWithFormat:@"%@?query=%@", s,
                              [q stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
   return [self getWithPath:url];
 }
 
-- (id) getWithQuery:(NSString *)q forTags:(NSArray *)t
+- (ServerResponse *) getWithQuery:(NSString *)q forTags:(NSArray *)t
 {
   return [self getWithPath:[self pathWithQuery:q forTags:t]];
 }
 
-- (id) pathWithQuery:(NSString *)q forTags:(NSArray *)arr
+- (NSString *) pathWithQuery:(NSString *)q forTags:(NSArray *)arr
 {
     return  [NSString stringWithFormat:@"/values?query=%@%@",
 		      [q stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding],
 			  [Session doTags:arr]];
 }
 
-- (id) headWithPath:(NSString *)s
+- (ServerResponse *) headWithPath:(NSString *)s
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"HEAD"];
-    return req;
+    return [self doRequest:req];
 }
 
-
 // this method is for sending primitive values in various states of undress.
-- (id) putWithPath:(NSString *)s andContent:(id)c
+- (ServerResponse *) putWithPath:(NSString *)s andContent:(id)c
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"PUT"];
     [req addValue:@"application/vnd.fluiddb.value+json" forHTTPHeaderField:@"Content-Type"];
     if ([c isKindOfClass:[NSData class]]) {
@@ -517,11 +509,11 @@
         [req setHTTPBody:d];
         [req addValue:[NSString stringWithFormat:@"%d", [d length]] forHTTPHeaderField:@"Content-Length"];
     }
-    return req;
+    return [self doRequest:req];
 }
-- (id) putWithPath:(NSString *)s andJson:(id)j
+- (ServerResponse *) putWithPath:(NSString *)s andJson:(id)j
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"PUT"];
     [req addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     if (![NSJSONSerialization isValidJSONObject:j])
@@ -530,27 +522,78 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:j options:normal error:&err];
     [req addValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
     [req setHTTPBody:body];
-    return req;    
+    return [self doRequest:req];
 }
 
-- (id) putWithPath:(NSString *)s andMimeType:(NSString *)t andContent:(NSData *)c
+- (ServerResponse *) putWithPath:(NSString *)s andMimeType:(NSString *)t andContent:(NSData *)c
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"PUT"];
     [req addValue:t forHTTPHeaderField:@"Content-Type"];
     [req addValue:[NSString stringWithFormat:@"%d", [c length]] forHTTPHeaderField:@"Content-Length"];
     [req setHTTPBody:c];
-    return req;
+    return [self doRequest:req];
+}
+
+// alternative, ensure's correct encoding, since we're having problems with newlines.
+// this is temporary, surely.
+- (ServerResponse *) putWithQuery:(NSDictionary *)q
+{
+  NSMutableURLRequest *req = [self subGetWithPath:@"values"];
+    [req setHTTPMethod: @"PUT"];
+    [req addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSMutableArray * queries = [[NSMutableArray alloc] initWithCapacity:([q count] + 1)];
+    for (NSString * query in [q allKeys]) {
+      NSMutableArray * arr = [NSMutableArray arrayWithObject:query];
+      NSDictionary * xxx = [q objectForKey:query];
+        for (NSString * tag in [xxx allKeys]) 
+            [arr addObject:[NSDictionary dictionaryWithObject:
+					    [NSDictionary dictionaryWithObject:
+                         [xxx objectForKey:tag] forKey:@"value"]
+							forKey:tag]];
+        [queries addObject:arr];
+    }
+    return [self putWithPath:@"/values" andJson:[NSDictionary dictionaryWithObject:queries forKey:@"queries"]];
+}
+			       
+
+/*
+{
+  "queries" : [
+    [ "mike/rating > 5",
+      {
+        "ntoll/rating" : {
+          "value" : 6
+        },
+        "ntoll/seen" : {
+          "value" : true
+        }
+      }
+    ],
+    [ "fluiddb/about matches \"great\"",
+      {
+        "ntoll/rating" : {
+          "value" : 10
+        }
+      }
+    ],
+    [ "fluiddb/id = \"6ed3e622-a6a6-4a7e-bb18-9d3440678851\"",
+      {
+        "mike/seen" : {
+          "value" : true
+      }
+    ]
+  ]
 }
 
 #define PUTVALQUERYSTART @"{\"queries\":["
 #define PUTVALQUERYEND @"]}"
 
 // this is a special dictionary.  its values must each be a dictionary of assignments to make to objects matching the query, which is the key.
-- (id) putWithPath:(NSString *)s andQuery:(NSDictionary *)q
+- (ServerResponse *) putWithQuery:(NSDictionary *)q
 {
 
-  NSMutableURLRequest *req = [self getWithPath:s];
+  NSMutableURLRequest *req = [self subGetWithPath:@"values"];
     [req setHTTPMethod: @"PUT"];
     [req addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     NSMutableString *body = [NSMutableString stringWithString:PUTVALQUERYSTART];
@@ -577,31 +620,31 @@
     NSData * d = [body dataUsingEncoding:NSUTF8StringEncoding];
     [req setHTTPBody:d];
     [req addValue:[NSString stringWithFormat:@"%d", [d length]] forHTTPHeaderField:@"Content-Length"];
-    return req;
+    return [self doRequest:req];
 }
-
-- (id) postWithPath:(NSString *)s
+*/
+- (ServerResponse *) postWithPath:(NSString *)s
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"POST"];
     [req addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    return req;
+    return [self doRequest:req];
 }
 
 // this method is for primitive content.
-- (id) postWithPath:(NSString *)s andContent:(NSData *)c
+- (ServerResponse *) postWithPath:(NSString *)s andContent:(NSData *)c
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"POST"];
     [req addValue:@"application/vnd.fluiddb.value+json" forHTTPHeaderField:@"Content-Type"];
     [req addValue:[NSString stringWithFormat:@"%d", [c length]] forHTTPHeaderField:@"Content-Length"];
     [req setHTTPBody:c];
-    return req;
+    return [self doRequest:req];
 }
 
-- (id) postWithPath:(NSString *)s andJson:(id)j
+- (ServerResponse *) postWithPath:(NSString *)s andJson:(id)j
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"POST"];
     [req addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     // make sure it's valid json.
@@ -611,14 +654,14 @@
     NSData *body = [NSJSONSerialization dataWithJSONObject:j options:normal error:&err];
     [req addValue:[NSString stringWithFormat:@"%d", [body length]] forHTTPHeaderField:@"Content-Length"];
     [req setHTTPBody:body];
-    return req;    
+    return [self doRequest:req];
 }
 
-- (id) deleteWithPath:(NSString *)s
+- (ServerResponse *) deleteWithPath:(NSString *)s
 {
-    NSMutableURLRequest *req = [self getWithPath:s];
+    NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"DELETE"];
-    return req;
+    return [self doRequest:req];
 }
 
 + (NSMutableString *) doTags:(NSArray *)arr
@@ -650,7 +693,7 @@
     // the content might be in a Value, for whatever reason.
     id c;
     if ([content isKindOfClass:[Value class]])
-         c = [content value];
+         c = [((Value *) content) value];
     else
          c = content;
     if (c == NULL) return @"null";
