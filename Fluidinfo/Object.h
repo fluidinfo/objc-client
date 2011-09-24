@@ -17,7 +17,7 @@
 // memory-control measures must be added, to comply with Apple's
 // memory requirements.  we don't want things crashing.
     NSMutableDictionary * tagValues;
-// the tagObjects dictionary also has tagpaths as keys, but tag
+// the tagValues dictionary also has tagpaths as keys, but tag
 // objects as values.  this makes saving / using tags with tag-values
 // easy.  this is referenced, not copied, so you can use the same tag
 // in multiple objects and have it actually really be the same tag.

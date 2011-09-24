@@ -18,7 +18,7 @@
 {
   self = [super init];
   if (self) {
-  instance = @"sandbox.fluidinfo.com";
+  instance = @"fluiddb.fluidinfo.com";
   scheme = @"http";
   }
   return self;
@@ -58,7 +58,6 @@
         // this ensures that all the information sent back from the
         // server is preserved in the usual way.  It's great for
         // debugging.
-
         NSDictionary * rinfo = [NSDictionary dictionaryWithObjectsAndKeys:
                                              [resp allHeaderFields], @"headers",
                                              data, @"data",
@@ -262,7 +261,6 @@
     }
 	return sofarsogood;
 }
-
 
 - (BOOL) isPrimitive:(id)thing
 {

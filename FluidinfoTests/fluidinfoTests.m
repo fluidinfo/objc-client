@@ -203,9 +203,9 @@
     STAssertTrue([@"PUT" isEqualToString:[request HTTPMethod]], @"correct method");
     STAssertTrue([[[request URL] path] isEqualToString:@"/values"], @"correct path.");
     const char * json = [[request HTTPBody] bytes];
-    NSLog(@"HTTPBody:\n%s", json);
     // not sure why the following is failing.  I can't get the escapes right.
-    STAssertTrue(strcmp(json, "{\"queries\":[[\"fluiddb\\/id = \\\".,curhs.co\\\"\",{\"test\\/public\\/prim1\":{\"value\":\"this is a primitive-bearing tag.\"}}") == 0, @"correct json.");
+    const char *expected = "{\"queries\":[[\"fluiddb\\/id = \\\".,curhs.co\\\"\",{\"test\\/public\\/prim1\":{\"value\":\"this is a primitive-bearing tag.\"}},{\"test\\/public\\/prim2\":{\"value\":42}}]]}";
+    STAssertTrue(strcmp(json, expected) == 0, @"correct json.");
 }
 
 

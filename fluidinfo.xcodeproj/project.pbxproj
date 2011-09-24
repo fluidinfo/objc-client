@@ -79,7 +79,7 @@
 		6555EFE413D63244007F4CDE /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
 		6555EFE513D63244007F4CDE /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
 		65665CCD13E36D1300E02397 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		65665CCF13E36D4800E02397 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = "<group>"; };
+		65665CCF13E36D4800E02397 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = AUTHORS; sourceTree = "<group>"; };
 		658154B91421197E00F67270 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = FluidinfoTests/Utils.h; sourceTree = SOURCE_ROOT; };
 		658154BA1421197E00F67270 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = FluidinfoTests/Utils.m; sourceTree = SOURCE_ROOT; };
 		6589778013DCA9200011717F /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Tag.h; path = Fluidinfo/Tag.h; sourceTree = SOURCE_ROOT; };
