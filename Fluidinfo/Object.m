@@ -9,8 +9,8 @@
 
 @implementation Object
 @synthesize about;
+@synthesize tagValues;
 @synthesize tags;
-@synthesize tagObjects;
 @synthesize dirtytags;
 
 - (id)init
@@ -21,8 +21,8 @@
 - (id) initWithAbout:(NSString *)a
 {
     self = [super init];
+    self->tagValues = [NSMutableDictionary dictionary];
     self->tags = [NSMutableDictionary dictionary];
-    self->tagObjects = [NSMutableDictionary dictionary];
     self->dirtytags = [NSMutableArray array];    
     [self setAbout:a];
     dirty = YES;
@@ -37,31 +37,31 @@
     [copy setURI:URI];
     [copy setFluidinfoId:fluidinfoId];
     copy->dirty = dirty;
-    [copy setTagObjects:[tagObjects copyWithZone:zone]];
+    [copy setTags:[tags copyWithZone:zone]];
     [copy setDirtytags:[dirtytags copyWithZone:zone]];
-    copy->tags = [tags copyWithZone:zone];
+    copy->tagValues = [tagValues copyWithZone:zone];
     return copy;                 
 }
 
 
 - (NSArray *) tagPaths
 {
-    if (tags == NULL)
+    if (tagValues == NULL)
 	{
 	    [self refresh];
 	}
-    return [tags allKeys];
+    return [tagValues allKeys];
 }
 
 - (Value *) tagValue:(Tag *)t
 {
-    if (tags == NULL)
+    if (tagValues == NULL)
 	[self refresh];
-    Value * v = [tags valueForKey:[t fullpath]];
+    Value * v = [tagValues valueForKey:[t fullpath]];
     if (v == NULL)
 	{
 	    [self tagValue:t];
-	    v = [tags valueForKey:[t fullpath]];        
+	    v = [tagValues valueForKey:[t fullpath]];        
 	}
     return v;   // which could actually be NULL.
                 // TODO: handle that case so that we don't have to keep asking just because it's a null-valued tag.
@@ -71,18 +71,18 @@
 - (BOOL) setTag:(Tag *)t withValue:(Value *)v
 {
     NSString *tagPath = [NSString stringWithFormat:@"%@/%@", [t path], [t name]]; // path + name
-    [tags setValue:v forKey:tagPath];
-    [tagObjects setValue:t forKey:tagPath];
+    [tagValues setValue:v forKey:tagPath];
+    [tags setValue:t forKey:tagPath];
     [dirtytags addObject:tagPath];
     return YES;
 }
 
 // this method does create a Tag object, but it is assumed to be an existent tag, so it creates a "clean" tag.  Do not use this method to create new tags.
-- (BOOL) setTagPath:(NSString *)t withValue:(id)v
+- (BOOL) setTagPath:(NSString *)t withValue:(Value *)v
 {
     Tag * tag = [Tag cleanTagWithName:[t lastPathComponent] andPath:[t stringByDeletingLastPathComponent]];
-    [tags setValue:v forKey:t];
-    [tagObjects setValue:tag forKey:t];
+    [tagValues setValue:v forKey:t];
+    [tags setValue:tag forKey:t];
     [dirtytags addObject:t];    
     return YES;
 }
