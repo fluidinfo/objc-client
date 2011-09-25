@@ -208,6 +208,16 @@
     STAssertTrue(strcmp(json, expected) == 0, @"correct json.");
 }
 
+- (void) testLLMethodPutWithPathAndContent
+{
+    // test string, integer, float, set, bool.
+    ServerResponse * resp = [session putWithPath:@"test/atag" andContent:@"foo foo \"foo!\" Bar?"];
+    NSMutableURLRequest * req = [[[resp err] userInfo] objectForKey:@"request"];
+    NSString * expected = @"foo foo \"foo!\" Bar?";
+    NSString * got = [NSJSONSerialization JSONObjectWithData:[req HTTPBody] options:NSJSONReadingAllowFragments error:NULL];
+    STAssertTrue([got isEqualToString:expected], @"correct primitive content.");
+    NSLog(@"expected:\n%@\ngot:\n%@\n", expected, got);
+}
 
 
 // TODO: this test has uncovered a problem in the JSON library, which is that it decodes floats as decimals, rounding as necessary.  We have to override how JSONSerialization is doing this, or possibly report the issue to Apple.  Meanwhile, this test might as well just check to see if the decimal is reasonably close to its original value.

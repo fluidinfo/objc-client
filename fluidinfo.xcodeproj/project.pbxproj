@@ -81,7 +81,7 @@
 		65665CCD13E36D1300E02397 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		65665CCF13E36D4800E02397 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; path = AUTHORS; sourceTree = "<group>"; };
 		658154B91421197E00F67270 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = FluidinfoTests/Utils.h; sourceTree = SOURCE_ROOT; };
-		658154BA1421197E00F67270 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = FluidinfoTests/Utils.m; sourceTree = SOURCE_ROOT; };
+		658154BA1421197E00F67270 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Utils.m; path = FluidinfoTests/Utils.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6589778013DCA9200011717F /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Tag.h; path = Fluidinfo/Tag.h; sourceTree = SOURCE_ROOT; };
 		6589778213DCA93F0011717F /* Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Namespace.h; path = Fluidinfo/Namespace.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6589778413DCAD3F0011717F /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Object.h; path = Fluidinfo/Object.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
