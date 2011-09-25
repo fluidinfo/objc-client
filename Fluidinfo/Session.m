@@ -503,9 +503,8 @@
     }
     else 
     {
-        NSData * d = [[Session packPrimitive:c] dataUsingEncoding:NSUTF8StringEncoding];
-        [req setHTTPBody:d];
-        [req addValue:[NSString stringWithFormat:@"%d", [d length]] forHTTPHeaderField:@"Content-Length"];
+        [req setHTTPBody:[Session packPrimitive:c]];
+        //        [req addValue:[NSString stringWithFormat:@"%d", [d length]] forHTTPHeaderField:@"Content-Length"];
     }
     return [self doRequest:req];
 }
@@ -605,11 +604,11 @@
 
 + (NSString *) doArgs:(NSArray *) a
 {
-  NSMutableString *args = [[NSMutableString alloc] init];
+    NSMutableString *args = [[NSMutableString alloc] init];
     BOOL first = YES;
     for (NSString * arg in a) {
-        [args appendFormat:@"%@%@", first ? @"" : @"&", arg];
-        if (first) first = NO;
+	[args appendFormat:@"%@%@", first ? @"" : @"&", arg];
+	if (first) first = NO;
     }
     return args;
 }
@@ -619,56 +618,51 @@
 // convert a primitive value, such as an integer (which must be
 // already packed into an NSValue in order to be passed to this
 // function), into suitable NSData for sending over the wire.
-+ (NSString *) packPrimitive:(id)content
++ (NSData *) packPrimitive:(id)content
 {
     // the content might be in a Value, for whatever reason.
     id c;
     if ([content isKindOfClass:[Value class]])
-         c = [((Value *) content) value];
+	c = [((Value *) content) value];
     else
-         c = content;
-    if (c == NULL) return @"null";
-    if ([c isKindOfClass:[NSString class]])
-        return [NSString stringWithFormat:@"\"%@\"",c];
-    
-    // sets of strings
-    if ([c isKindOfClass:[NSArray class]])
-    {
-        // see if it's compatible with the definition of primitives sets
-        // in the Fluidinfo documentation.
-        BOOL cando = YES;
-        for (NSString * item in c)
-            if (![item isKindOfClass:[NSString class]]) {
-                cando = NO;
-                break;
-            }
-        if (!cando) return [NSError errorWithDomain:_DOMAIN code:2 userInfo:
-                            [NSDictionary dictionaryWithObject:
-                             @"cannot send arrays with non-string members as fluidinfo primitives." forKey:@"reason"]];
-        NSMutableString * temp = [[NSMutableString alloc] initWithString:@"["];
-        for (NSString * item in c) {
-            [temp appendFormat:@"%s\"%@\"", cando ? "" : ",", item]; // variable recycling.
-            cando = NO;
-        }
-        [temp appendString:@"]"];
-        return temp;
+	c = content;
+    if ([c isKindOfClass:[NSArray class]]) {
+	// see if it's compatible with the definition of primitives sets
+	// in the Fluidinfo documentation.
+	BOOL cando = YES;
+	for (NSString * item in c)
+	    if (![item isKindOfClass:[NSString class]]) {
+		cando = NO;
+		break;
+	    }
+	if (!cando) return [NSError errorWithDomain:_DOMAIN code:2 userInfo:
+					[NSDictionary dictionaryWithObject:
+							  @"cannot send arrays with non-string members as fluidinfo primitives." forKey:@"reason"]];
+	return [NSJSONSerialization dataWithJSONObject:content options:normal error:NULL];
     }
-    
-    if (![c isKindOfClass:[NSNumber class]])
-        return [NSError errorWithDomain:_DOMAIN code:3 userInfo:
-                [NSDictionary dictionaryWithObject:
-                 @"attempted to send a non-fluidinfo-primitive value as a primitive." forKey:@"reason"]];
-    
-    // bools, ints, and floats.
-    const char * type = [c objCType];
+    if ([c isKindOfClass:[NSString class]]) {
+	NSData * arr = [NSJSONSerialization dataWithJSONObject:
+				      [NSArray arrayWithObject:content] options:normal error:NULL];
+	return [arr subdataWithRange:NSMakeRange(1, [arr length] - 2)]; // lame, I know.
+    }
     NSString * val;
-    if (*type == 'c')
-        val = [c boolValue] == YES ? @"true" : @"false";
-    if (*type == 'i')
-        val = [NSString stringWithFormat:@"%i", [c integerValue]];
-    if (*type == 'f')
-        val = [NSString stringWithFormat:@"%f", [c floatValue]];
-    return val;
+    if (c == NULL) val = @"null";
+    if ([c isKindOfClass:[NSNumber class]]) {
+	switch ([c objCType][0]) {
+	case 'c':
+	    val = [c boolValue] == YES ? @"true" : @"false";
+	case 'i':
+	    val = [NSString stringWithFormat:@"%i", [c integerValue]];
+	case 'f':
+	    val = [NSString stringWithFormat:@"%f", [c floatValue]];
+	default:
+	    return [NSError errorWithDomain:_DOMAIN code:3 userInfo:
+				[NSDictionary dictionaryWithObject:
+						  @"attempted to send a non-fluidinfo-primitive value as a primitive." forKey:@"reason"]];
+	return [val dataUsingEncoding:NSUTF8StringEncoding];
+	}
+    }
+    return NULL;
 }
 
 
