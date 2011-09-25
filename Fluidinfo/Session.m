@@ -659,8 +659,9 @@
 	    return [NSError errorWithDomain:_DOMAIN code:3 userInfo:
 				[NSDictionary dictionaryWithObject:
 						  @"attempted to send a non-fluidinfo-primitive value as a primitive." forKey:@"reason"]];
-	return [val dataUsingEncoding:NSUTF8StringEncoding];
+
 	}
+	return [val dataUsingEncoding:NSUTF8StringEncoding];
     }
     return NULL;
 }
