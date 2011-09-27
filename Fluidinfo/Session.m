@@ -497,15 +497,11 @@
     NSMutableURLRequest *req = [self subGetWithPath:s];
     [req setHTTPMethod: @"PUT"];
     [req addValue:@"application/vnd.fluiddb.value+json" forHTTPHeaderField:@"Content-Type"];
-    if ([c isKindOfClass:[NSData class]]) {
+    if ([c isKindOfClass:[NSData class]])
         [req setHTTPBody:c];   
-        [req addValue:[NSString stringWithFormat:@"%d", [c length]] forHTTPHeaderField:@"Content-Length"];
-    }
     else 
-    {
         [req setHTTPBody:[Session packPrimitive:c]];
-        //        [req addValue:[NSString stringWithFormat:@"%d", [d length]] forHTTPHeaderField:@"Content-Length"];
-    }
+    [req addValue:[NSString stringWithFormat:@"%d", [[req HTTPBody] length]] forHTTPHeaderField:@"Content-Length"];
     return [self doRequest:req];
 }
 - (ServerResponse *) putWithPath:(NSString *)s andJson:(id)j
@@ -651,10 +647,13 @@
 	switch ([c objCType][0]) {
 	case 'c':
 	    val = [c boolValue] == YES ? @"true" : @"false";
+            break;
 	case 'i':
 	    val = [NSString stringWithFormat:@"%i", [c integerValue]];
+            break;
 	case 'f':
 	    val = [NSString stringWithFormat:@"%f", [c floatValue]];
+            break;
 	default:
 	    return [NSError errorWithDomain:_DOMAIN code:3 userInfo:
 				[NSDictionary dictionaryWithObject:
