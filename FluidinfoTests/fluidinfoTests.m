@@ -204,7 +204,7 @@
     STAssertTrue([[[request URL] path] isEqualToString:@"/values"], @"correct path.");
     const char * json = [[request HTTPBody] bytes];
     // not sure why the following is failing.  I can't get the escapes right.
-    const char *expected = "{\"queries\":[[\"fluiddb\\/id = \\\".,curhs.co\\\"\",{\"test\\/public\\/prim1\":{\"value\":\"this is a primitive-bearing tag.\"}},{\"test\\/public\\/prim2\":{\"value\":42}}]]}";
+    const char * expected = "{\"queries\":[[\"fluiddb\\/id = \\\".,curhs.co\\\"\",{\"test\\/public\\/prim1\":{\"value\":\"this is a primitive-bearing tag.\"}},{\"test\\/public\\/prim2\":{\"value\":42}}]]}";
     STAssertTrue(strcmp(json, expected) == 0, @"correct json.");
 }
 
@@ -216,7 +216,13 @@
     NSString * expected = @"foo foo \"foo!\" Bar?";
     NSString * got = [NSJSONSerialization JSONObjectWithData:[req HTTPBody] options:NSJSONReadingAllowFragments error:NULL];
     STAssertTrue([got isEqualToString:expected], @"correct primitive content.");
-    NSLog(@"expected:\n%@\ngot:\n%@\n", expected, got);
+    
+    resp = [session putWithPath:@"test/atag" andContent:[NSArray arrayWithObjects:@"stringfirst", @"anotherstring", nil]];
+    req = [[[resp err] userInfo] objectForKey:@"request"];
+    const char * exp = "[\"stringfirst\",\"anotherstring\"]";
+    const char * gott = [[req HTTPBody] bytes];
+    STAssertTrue(strcmp(gott, exp) == 0, @"correct content for set primitive.");
+
 }
 
 
