@@ -10,7 +10,7 @@
 @class Value;
 #import "FluidObject.h"
 
-@interface Object : FluidObject
+@interface FObject : FluidObject
 {
 // the tags dictionary contains everything about the object, using
 // tagPaths as keys.  it must be used with discretion for now.  Later,
