@@ -5,10 +5,10 @@
 //  Created by Barbara Shirtcliff on 9/11/11.
 //
 
-#import "Object.h"
+#import "FObject.h"
 @class Tag;
 
-@interface Sample : Object {
+@interface Sample : FObject {
     Tag * rating;
     Tag * comment;
     Tag * dateRead;

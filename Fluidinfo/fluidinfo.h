@@ -8,7 +8,7 @@
 #import "FluidObject.h"
 #import "Tag.h"
 #import "Namespace.h"
-#import "Object.h"
+#import "FObject.h"
 #import "Value.h"
 #import "Session.h"
 #import "ServerResponse.h"
