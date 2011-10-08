@@ -153,7 +153,7 @@
 
 - (BOOL) reset:(FluidObject *)fl
 {
-  if ([fl isKindOfClass:[Object class]])
+  if ([fl isKindOfClass:[FObject class]])
     {
       // refresh all the tags that are on the object to null and get rid
       // of any tags that have been added with a value but never saved.
@@ -161,7 +161,7 @@
       // marked "dirty."  It also does not delete tags in the tagObjects
       // dictionary, even if they are not actually attached to this
       // object.
-      Object * obj = (Object *) fl;
+      FObject * obj = (FObject *) fl;
       id  got = [self get:obj];
       if ([got isKindOfClass:[NSNumber class]])
 	return NO;
@@ -207,7 +207,7 @@
     NSDictionary * rdict = [NSJSONSerialization JSONObjectWithData:response.data options:normal error:NULL];
     [fl setURI: [rdict valueForKey:@"URI"]];
     [fl setFluidinfoId: [rdict valueForKey:@"id"]];
-    if ([fl isKindOfClass:[Object class]]) 
+    if ([fl isKindOfClass:[FObject class]]) 
       // if it's an object, we need to save any dirty tags that it might have.
       return [self resave:fl]; 
     [fl markClean];
@@ -216,7 +216,7 @@
 
 - (BOOL) resave:(FluidObject *)fl
 {
-    if (![fl isKindOfClass:[Object class]]) {
+    if (![fl isKindOfClass:[FObject class]]) {
 	ServerResponse * response = [self 
 					   putWithPath:[fl resavePath] andJson:[fl resaveJSON]];
 	if (response.err != NULL)
@@ -227,7 +227,7 @@
 	[fl markClean];
 	return YES;
     }
-    Object * obj = (Object *) fl;
+    FObject * obj = (FObject *) fl;
     if (![obj isdirty]) return YES;
     // this is a  one-liner with foldl, in Haskell.  :(
     BOOL sofarsogood = YES;
@@ -354,7 +354,7 @@
   return YES;
 }
 
-- (BOOL) object:(Object *)o tagValue:(Tag *)t
+- (BOOL) object:(FObject *)o tagValue:(Tag *)t
 {
 // load a tag-value from Fluidinfo into the object's tags dictionary.
     NSString * path = [NSString stringWithFormat:@"%@/%@",
@@ -375,7 +375,7 @@
     return NO;
 }
 
-- (BOOL) object:(Object *)fl hasTag:(Tag *)t
+- (BOOL) object:(FObject *)fl hasTag:(Tag *)t
 {
     NSString * path = [fl pathForTag:t];
     ServerResponse * resp = [self headWithPath:path];
@@ -386,12 +386,12 @@
     return NO;
 }
 
-- (BOOL) object:(Object *)fl saveTagByString:(NSString *)t
+- (BOOL) object:(FObject *)fl saveTagByString:(NSString *)t
 {
   return [self object:fl saveTag:[[fl tags] valueForKey:t]];
 }
 
-- (BOOL) object:(Object *)fl saveTag:(Tag *)t
+- (BOOL) object:(FObject *)fl saveTag:(Tag *)t
 {
     // don't save it if it isn't dirty.
     if (![[fl dirtytags] containsObject:[t fullpath]])
@@ -428,12 +428,12 @@
     return NO;
 }
 
-- (BOOL) object:(Object *)fl removeTagString:(NSString *)s
+- (BOOL) object:(FObject *)fl removeTagString:(NSString *)s
 {
   return [self object:fl removeTag:[[fl tags] valueForKey:s]];
 }
 
-- (BOOL) object:(Object *)fl removeTag:(Tag *)t
+- (BOOL) object:(FObject *)fl removeTag:(Tag *)t
 {
     ServerResponse * resp = [self deleteWithPath:[fl pathForTag:t]];
     if (resp.err == NULL)

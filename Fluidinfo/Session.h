@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSStringAdditions.m"
 @class ServerResponse;
-@class FluidObject, Tag, Object, Permission;
+@class FluidObject, Tag, FObject, Permission;
 
 @interface Session : NSObject
 {
@@ -42,12 +42,12 @@
 - (Permission *) getTagValuePermission:(NSString *)act forTag:(Tag *)t;
 - (BOOL) setValuePermission:(NSString *)act to:(Permission *)p forTag:(Tag *)t;
 
-- (BOOL) object:(Object *)o tagValue:(Tag *)t;
-- (BOOL) object:(Object *)fl hasTag:(Tag *)t;
-- (BOOL) object:(Object *)fl saveTagByString:(NSString *)t;
-- (BOOL) object:(Object *)fl saveTag:(Tag *)t;
-- (BOOL) object:(Object *)fl removeTag:(Tag *)t;
-- (BOOL) object:(Object *)fl removeTagString:(NSString *)t;
+- (BOOL) object:(FObject *)o tagValue:(Tag *)t;
+- (BOOL) object:(FObject *)fl hasTag:(Tag *)t;
+- (BOOL) object:(FObject *)fl saveTagByString:(NSString *)t;
+- (BOOL) object:(FObject *)fl saveTag:(Tag *)t;
+- (BOOL) object:(FObject *)fl removeTag:(Tag *)t;
+- (BOOL) object:(FObject *)fl removeTagString:(NSString *)t;
 
 // lower-level methods.
 - (ServerResponse *) getWithPath:(NSString *)s;
