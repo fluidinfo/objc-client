@@ -182,7 +182,7 @@
 
 - (void) testObjectSaveWithTagValues
 {
-    Object * obj = [FluidObject Object];
+    FObject * obj = [FluidObject FObject];
     obj.URI = @"oentush,";
     obj.fluidinfoId = @".,curhs.co";
     

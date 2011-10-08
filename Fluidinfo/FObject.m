@@ -1,5 +1,5 @@
 //
-//  Object.m
+//  FObject.m
 //  fluidinfo
 //
 //  Created by Barbara Shirtcliff on 7/24/11.
@@ -7,7 +7,7 @@
 
 #import "fluidinfo.h"
 
-@implementation Object
+@implementation FObject
 @synthesize about;
 @synthesize tagValues;
 @synthesize tags;
@@ -31,7 +31,7 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    Object *copy = [[Object allocWithZone: zone] 
+    FObject *copy = [[FObject allocWithZone: zone] 
                     initWithAbout:about];
     [copy setErr:err];
     [copy setURI:URI];
