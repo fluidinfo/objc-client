@@ -33,12 +33,12 @@
   return [[Tag alloc] initWithName:n andPath:p andDescription:d];
 }
 
-+ (FObject *) Object
++ (FObject *) FObject
 {
     return [[FObject alloc] init];
 }
 
-+ (FObject *) Object:(NSString *)about
++ (FObject *) FObject:(NSString *)about
 {
     return [[FObject alloc] initWithAbout:about];
 }

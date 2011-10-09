@@ -590,6 +590,13 @@
     return [self doRequest:req];
 }
 
+- (ServerResponse *) deleteTags:(NSArray *)t forQuery:(NSString *)q
+{
+    NSMutableURLRequest * req = [self subGetWithPath:[self pathWithQuery:q forTags:t]];
+    [req setHTTPMethod:@"DELETE"];
+    return [self doRequest:req];
+}
+
 + (NSMutableString *) doTags:(NSArray *)arr
 {
     NSMutableString *args = [[NSMutableString alloc] init];

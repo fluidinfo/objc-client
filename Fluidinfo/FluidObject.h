@@ -26,8 +26,8 @@
 + (Namespace *) Namespace:(NSString *)n withPath:(NSString *)p andDescription:(NSString *)d;
 + (Tag *) Tag:(NSString *)n withPath:(NSString *)p;
 + (Tag *) Tag:(NSString *)n withPath:(NSString *)p andTagDescription:(NSString *)d;
-+ (FObject *) Object;
-+ (FObject *) Object:(NSString *)about;
++ (FObject *) FObject;
++ (FObject *) FObject:(NSString *)about;
 - (BOOL) isdirty;
 - (void) markDirty;
 - (void) markClean;

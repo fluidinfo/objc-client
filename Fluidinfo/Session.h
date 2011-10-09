@@ -65,6 +65,7 @@
 - (ServerResponse *) postWithPath:(NSString *)s andContent:(NSData *)c;
 - (ServerResponse *) postWithPath:(NSString *)s andJson:(id)j;
 - (ServerResponse *) deleteWithPath:(NSString *)s;
+- (ServerResponse *) deleteTags:(NSArray *)t forQuery:(NSString *)q;
 
 + (NSData *) packPrimitive:(id)c;
 + (NSString *) doArgs:(NSArray *)d;
