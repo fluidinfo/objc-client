@@ -26,6 +26,7 @@
 - (void) testObjectSaveWithTagValues;
 // test lower-level methods.
 - (void) testLLMethodPutWithPathAndContent;
+- (void) testDeleteTagsForQuery;
 // test permissions
 // test objects
 // test response handling: 

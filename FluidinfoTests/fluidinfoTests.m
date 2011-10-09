@@ -246,6 +246,20 @@
                  @"correct content for integer primitive.");
 }
 
+- (void)testDeleteTagsForQuery
+{
+  ServerResponse * resp = [session deleteTags:
+				     [NSArray arrayWithObjects:@"ntoll/rating", @"ntoll/resume", nil]
+                                     forQuery:@"mike/rating > 5"];
+    NSMutableURLRequest * req = [[[resp err] userInfo] objectForKey:@"request"];
+    BOOL okayheaders = [Utils headersOkay:[req  allHTTPHeaderFields]
+                              withAllowed:[NSArray arrayWithObjects:@"User-Agent", @"Accept", nil]
+                                 required:[NSArray arrayWithObjects:@"Authorization", nil]]; 
+    STAssertTrue(okayheaders, @"correct headers");
+    STAssertTrue([[[req URL] query] isEqualToString:@"query=mike/rating%20%3E%205&tag=ntoll/rating&tag=ntoll/resume"], @"correct query.");
+    STAssertTrue([[[req URL] path] isEqualToString:@"/values"], @"correct path.");
+    STAssertNil([req HTTPBody], @"null body");
+}
 
 // TODO: this test has uncovered a problem in the JSON library, which is that it decodes floats as decimals, rounding as necessary.  We have to override how JSONSerialization is doing this, or possibly report the issue to Apple.  Meanwhile, this test might as well just check to see if the decimal is reasonably close to its original value.
 - (void) dataCheck:(NSMutableURLRequest *)request forValue:(id)val
