@@ -35,7 +35,6 @@
 - (BOOL) reset:(FluidObject *)fl;
 - (BOOL) save:(FluidObject *)fl;
 - (BOOL) resave:(FluidObject *)fl;
-- (BOOL) isPrimitive:(id)thing; // wrong spot!  move soon.
 - (BOOL) delete:(FluidObject *)fl;
 
 - (Permission *) getPermission:(NSString *)act for:(FluidObject *)fl;
@@ -68,6 +67,7 @@
 - (ServerResponse *) deleteWithPath:(NSString *)s;
 - (ServerResponse *) deleteTags:(NSArray *)t forQuery:(NSString *)q;
 
++ (BOOL) isPrimitive:(id)thing;
 + (NSData *) packPrimitive:(id)c;
 + (NSString *) doArgs:(NSArray *)d;
 + (NSString *) doTags:(NSArray *)arr;
