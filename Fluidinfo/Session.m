@@ -13,7 +13,7 @@
 #define __DEBUG__ YES
 
 @implementation Session
-@synthesize instance, scheme;
+@synthesize instance, scheme, username;
 - (id) init 
 {
   self = [super init];
@@ -82,6 +82,7 @@
     [headers setValue:[NSString stringWithFormat:@"Basic %@",auth]
                forKey:@"Authorization"];
     scheme = @"https";
+    username = u;
 }
 
 - (void) initHeaders
