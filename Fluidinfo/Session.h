@@ -15,12 +15,13 @@
 {
   NSString * instance;
   NSString * scheme;
+  NSString * username;
 @private
   NSDictionary * headers;
 }
 @property (readwrite, copy) NSString * instance;
 @property (readwrite, copy) NSString * scheme;
-
+@property (readwrite, copy) NSString * username;
 - (id) init;
 + (id) initWithUsername:(NSString *)u andPassword:(NSString *)p;
 - (ServerResponse *) doRequest:(NSMutableURLRequest *)req;
