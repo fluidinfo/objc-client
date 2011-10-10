@@ -239,7 +239,7 @@
     id val;
     for (NSString * tag in [[obj dirtytags] copy]) {
 	val = [[obj tagValues] objectForKey:tag];
-        if ([self isPrimitive:val]) {
+        if ([Session isPrimitive:val]) {
             [assignments setObject:[((Value *)val) value] forKey:tag];
             [[obj dirtytags] removeObject:tag]; 
         }
@@ -261,11 +261,6 @@
         sofarsogood = success && sofarsogood;
     }
 	return sofarsogood;
-}
-
-- (BOOL) isPrimitive:(id)thing
-{
-    return [thing isKindOfClass:[Value class]] && ![((Value *) thing) type];
 }
 
 - (BOOL) delete:(FluidObject *)fl
@@ -617,7 +612,10 @@
     return args;
 }
 
-
++ (BOOL) isPrimitive:(id)thing
+{
+    return [thing isKindOfClass:[Value class]] && ![((Value *) thing) type];
+}
 
 // convert a primitive value, such as an integer (which must be
 // already packed into an NSValue in order to be passed to this
